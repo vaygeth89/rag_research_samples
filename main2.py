@@ -41,7 +41,7 @@ def main():
     
     script_directory = os.path.dirname(os.path.abspath(__file__))
     data_folder = ""
-    default_file_name = "./documents/" + "document.pdf"
+    default_file_name = "./documents/" + "sample.pdf"
     default_file_path = os.path.join(script_directory, data_folder, default_file_name)
     
     uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
