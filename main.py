@@ -1,5 +1,6 @@
 import os
 import logging
+import sys
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
@@ -127,8 +128,9 @@ def main():
     # Ensure Ollama is running and the model is pulled
     # You can pull the model using: ollama pull mistral
 
+    document_name = sys.argv[1] if len(sys.argv) > 1 else "sample.pdf"
     # Replace with your PDF path
-    PDF_PATH = "./documents/Cards.pdf"
+    PDF_PATH = "./documents/" + document_name
 
     if not os.path.exists(PDF_PATH):
         logging.error(f"The file {PDF_PATH} does not exist.")

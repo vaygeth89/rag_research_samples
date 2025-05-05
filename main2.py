@@ -15,7 +15,7 @@ def extract_text_from_pdf(file_path):
     documents = loader.load()
     return ' '.join([doc.page_content for doc in documents])
 
-def split_text_into_chunks(text: str, chunk_size: int = 350, chunk_overlap: int = 200):
+def split_text_into_chunks(text: str, chunk_size: int = 500, chunk_overlap: int = 200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     return text_splitter.create_documents([text])
 
@@ -37,13 +37,11 @@ def generate_response(vector_store, query):
     
 
 def main():
-    document_name = sys.argv[1]
     st.title("PDF Question-Answering App Using Load QA Chain")
     
     script_directory = os.path.dirname(os.path.abspath(__file__))
     data_folder = ""
-    print("document_name", document_name)
-    default_file_name = "./documents/" + document_name
+    default_file_name = "./documents/" + "document.pdf"
     default_file_path = os.path.join(script_directory, data_folder, default_file_name)
     
     uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
