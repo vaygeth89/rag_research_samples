@@ -48,7 +48,7 @@ def main():
     
     if uploaded_file is not None:
         # Save the uploaded file to a temporary location
-        uploaded_file_path = os.path.join(script_directory, uploaded_file.name)
+        uploaded_file_path = os.path.join(script_directory+"/documents", uploaded_file.name)
         with open(uploaded_file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
     else:
