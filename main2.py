@@ -23,7 +23,8 @@ def create_vector_store(chunks):
     return Chroma.from_documents(chunks, embeddings)
 
 def generate_response(vector_store, query):
-    llm = OllamaLLM(model="qwen2.5:latest")
+    # llm = OllamaLLM(model="qwen2.5:latest")
+    llm = OllamaLLM(model="llama3.2")
     chain = load_qa_chain(llm, chain_type="stuff", verbose=True)
     matching_docs = vector_store.similarity_search(query)
     response = chain.invoke(
