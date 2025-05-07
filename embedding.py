@@ -13,13 +13,13 @@ def extract_text_from_pdf(file_path):
     documents = loader.load()
     return ' '.join([doc.page_content for doc in documents])
 
-def split_text_into_chunks(text: str, chunk_size: int = 500, chunk_overlap: int = 200):
+def split_text_into_chunks(text: str, chunk_size: int = 1000, chunk_overlap: int = 200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     return text_splitter.create_documents([text])
 
-def create_vector_store(chunks):
+def create_vector_store(chunks,directory="./data/chroma_db"):
     embeddings = initialize_embeddings()
-    return Chroma.from_documents(chunks, embeddings)
+    return Chroma.from_documents(chunks, embeddings,persist_directory=directory)
 
 def start_vector_store(file_path):
     if not os.path.exists(file_path):

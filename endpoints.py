@@ -25,3 +25,15 @@ def start_embedding(query:str):
 async def create_upload_file(file: UploadFile):
     await save_file(file)
     return {"filename": file.filename}
+
+
+@app.post("/embedding_document/")
+async def create_upload_file(file: UploadFile, query: str):
+    file_path =await save_file(file)
+    vector_store =start_vector_store(file_path)
+    answer = generate_response(vector_store, query)
+    logging.info(f"Answer: {answer}")
+    # conversation_message = ConversationMessage(
+    #   content=str(answer["output_text"]),
+    # )
+    return ConversationMessage(content=str(answer["output_text"]))
