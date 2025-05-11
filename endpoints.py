@@ -18,7 +18,8 @@ def start_embedding(query:str):
     # conversation_message = ConversationMessage(
     #   content=str(answer["output_text"]),
     # )
-    return ConversationMessage(content=str(answer["output_text"]))
+    return answer
+    # return ConversationMessage(content=str(answer["output_text"]))
 
 
 @app.post("/uploadfile/")
