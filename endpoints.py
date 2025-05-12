@@ -10,9 +10,10 @@ from models.conversation_message import ConversationMessage
 
 app = FastAPI()
 
-@app.post("/start_embedding")
-def start_embedding(query:str):
-    vector_store =start_vector_store("./documents/sample.pdf")
+
+@app.post("/search")
+def search(query: str):
+    vector_store = start_vector_store("./documents/sample.pdf")
     answer = generate_response(vector_store, query)
     logging.info(f"Answer: {answer}")
     # conversation_message = ConversationMessage(
@@ -30,8 +31,8 @@ async def create_upload_file(file: UploadFile):
 
 @app.post("/embedding_document/")
 async def create_upload_file(file: UploadFile, query: str):
-    file_path =await save_file(file)
-    vector_store =start_vector_store(file_path)
+    file_path = await save_file(file)
+    vector_store = start_vector_store(file_path)
     answer = generate_response(vector_store, query)
     logging.info(f"Answer: {answer}")
     # conversation_message = ConversationMessage(
